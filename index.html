@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cuty Bot - your 3D robot buddy</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-state="idle">
+<div id="app">
+
+  <header class="top">
+    <div class="brand">Cuty Bot <span class="heart">💗</span></div>
+    <div class="stats" aria-label="Pet status">
+      <div class="stat" title="Fullness"><span class="ic">🍎</span><span class="lbl">Full</span><div class="bar" role="progressbar" aria-label="Fullness" aria-valuemin="0" aria-valuemax="100"><i id="barFull"></i></div></div>
+      <div class="stat" title="Cleanliness"><span class="ic">🫧</span><span class="lbl">Clean</span><div class="bar" role="progressbar" aria-label="Cleanliness" aria-valuemin="0" aria-valuemax="100"><i id="barClean"></i></div></div>
+      <div class="stat" title="Happiness"><span class="ic">💗</span><span class="lbl">Happy</span><div class="bar" role="progressbar" aria-label="Happiness" aria-valuemin="0" aria-valuemax="100"><i id="barHappy"></i></div></div>
+    </div>
+    <div class="tools">
+      <button id="viewBtn" class="round" type="button" title="Reset camera view" aria-label="Reset camera view">🎥</button>
+      <button id="memBtn" class="round" type="button" title="What Cuty Bot remembers" aria-label="Memory">🧠</button>
+      <button id="soundBtn" class="round" type="button" title="Sound on/off" aria-label="Sound on or off">🔊</button>
+      <button id="themeBtn" class="round" type="button" title="Light / dark mode" aria-label="Light or dark mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <canvas id="scene" aria-label="Cuty Bot the 3D robot. Tap her, or drag to turn the view."></canvas>
+    <div id="sceneError" class="scene-error" hidden></div>
+    <div class="state-chip"><span class="dot"></span><span id="stateLabel">Idle</span></div>
+  </main>
+
+  <section class="dock">
+    <div id="bubble" class="bubble" role="status" aria-live="polite">
+      <div id="bubbleText">Hi!</div>
+      <div id="youSaid" class="you"></div>
+    </div>
+
+    <div class="actions" role="group" aria-label="Pet actions">
+      <button type="button" data-action="jump">🦘 Jump</button>
+      <button type="button" data-action="wave">👋 Wave</button>
+      <button type="button" data-action="turn">🔄 Turn</button>
+      <button type="button" data-action="nod">🙂 Nod</button>
+      <button type="button" data-action="dance">💃 Dance</button>
+      <button type="button" data-action="clap">👏 Clap</button>
+      <button type="button" data-action="kick">🦵 Kick</button>
+      <button type="button" data-action="meow">🐱 Meow</button>
+      <button type="button" data-action="bark">🐶 Bark</button>
+      <button type="button" data-action="treat">🍎 Treat</button>
+      <button type="button" data-action="bath">🛁 Bath</button>
+      <button type="button" data-action="happy">🎉 Happy</button>
+      <button type="button" data-action="wake">☀️ Wake</button>
+      <button type="button" data-action="sleep">🌙 Sleep</button>
+    </div>
+
+    <form id="chatForm" class="chat" autocomplete="off">
+      <input id="msg" type="text" placeholder="Ask me: capital of India?  or  teach: question = answer" aria-label="Type a message" maxlength="200">
+      <button type="submit" class="send">Send</button>
+      <button id="micBtn" type="button" class="mic" aria-label="Microphone: tap to start or stop listening" aria-pressed="false">🎤</button>
+    </form>
+    <div id="micStatus" class="micstatus" role="status"></div>
+
+    <details class="settings">
+      <summary>⚙️ Voice &amp; settings</summary>
+      <div class="grid">
+        <label class="chk"><input id="speakChk" type="checkbox" checked> Speak</label>
+        <button id="repeatBtn" type="button" aria-pressed="false">🔁 Repeat OFF</button>
+        <button id="againBtn" type="button">🔊 Say again</button>
+        <label>Language
+          <select id="langSel">
+            <option value="en-GB">English (United Kingdom)</option>
+            <option value="en-IN">English (India)</option>
+            <option value="en-US">English (United States)</option>
+            <option value="ta-IN">Tamil (தமிழ்)</option>
+            <option value="hi-IN">Hindi (हिन्दी)</option>
+          </select>
+        </label>
+        <label>Voice <select id="voiceSel"><option value="">Auto (best match)</option></select></label>
+        <label>Pitch <input id="pitchRange" type="range" min="0.5" max="2" step="0.05" value="1.35"></label>
+        <label>Speed <input id="rateRange" type="range" min="0.5" max="1.5" step="0.05" value="0.9"></label>
+        <label>Volume <input id="volRange" type="range" min="0" max="100" step="5" value="70"></label>
+      </div>
+      <p id="voiceNote" class="note"></p>
+    </details>
+  </section>
+</div>
+
+<dialog id="memDialog">
+  <h2>🧠 What Cuty Bot remembers</h2>
+  <p class="note">Saved only on this device in your browser. Nothing is uploaded and no recordings are kept.</p>
+  <div id="memList"></div>
+  <div class="dlgbtns"><button id="memClear" type="button" class="danger">Clear all memory</button><button id="memClose" type="button">Close</button></div>
+</dialog>
+
+<script src="js/three.min.js"></script>
+<script src="js/replies.js"></script>
+<script src="js/robot.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
